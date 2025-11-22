@@ -1,0 +1,11 @@
+Recipe Manager
+
+TODOS (GENERAL)
+
+Create a location to store submitted recipes
+Create a way to upload recipes
+Create a way to view recipes
+Create a step by step recipe instruction w/ test to speech
+Create a way to store recipes
+Create a way to delete recipes
+Create a frontend
