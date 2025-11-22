@@ -1,20 +1,19 @@
 import java.util.ArrayList;
 
 public class User {
-  
-  private ArrayList <String> allergies;
-  private ArrayList <String> methods;
+  private ArrayList<String> allergies;
+  private ArrayList<String> methods;
   private ArrayList<Recipe> favoriteRecipes;
   
   private static int userCounter = 1;
   private String userID = "ID";
   private String username;
-  private boolean student;
+  private boolean isStudent;
   
   //constructor
-  public User(String username, boolean student) {
+  public User(String username, boolean isStudent) {
     this.username = username;
-    this.student = student;
+    this.isStudent = isStudent;
     
     this.favoriteRecipes = new ArrayList<>();
     this.allergies = new ArrayList<>();
@@ -32,10 +31,10 @@ public class User {
       this.username = username;
   }
   public boolean getStudent() {
-      return student;
+      return isStudent;
   }
-  public void setStudent(boolean student) {
-      this.student = student
+  public void setStudent(boolean isStudent) {
+      this.isStudent = isStudent
   }
   public ArrayList<Recipe> getFavoriteRecipes() {
       return favoriteRecipes;
@@ -62,12 +61,9 @@ public class User {
   }
   public String printUserSummary() {
     return "User: " + username +
-            "\nStudent: " + student +
+            "\nStudent: " + isStudent +
             "\nAllergies: " + allergies +
             "\nPreferred Methods (oven, airfryer, stove, microwave): " + methods +
             "\nFavorite Recipes: " + favoriteRecipes.size();
   }
-  
-  
-
 }
