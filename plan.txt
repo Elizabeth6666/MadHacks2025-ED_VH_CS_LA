@@ -2,6 +2,8 @@ Recipe Manager
 
 TODOS (GENERAL)
 
+Ingredient sorter
+
 Create a location to store submitted recipes
 Create a way to upload recipes
 Create a way to view recipes
