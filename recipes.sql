@@ -1,0 +1,4 @@
+-- CREATE TABLE RECIPE (recID TEXT NOT NULL PRIMARY KEY, recName TEXT NOT NULL, ingredients TEXT NOT NULL, cookTime DOUBLE NOT NULL, cookMethod TEXT NOT NULL, allergens TEXT NOT NULL);
+
+
+
