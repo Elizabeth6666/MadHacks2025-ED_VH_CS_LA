@@ -1,0 +1,9 @@
+[Meal Planner Name] is a meal-planning website designed for students who want to eat better 
+without wasting time. Our website organizes recipes based on your allergies, cooking methods,
+and time constraints. Users can upload their own recipes, save favorites, and instantly filter 
+options by allergens, ingredients, or kitchen tools they have.
+
+With features like step-by-step cooking instructions, ingredient sorting, and text-to-speech 
+guidance, [Meal Planner Name] eliminates the boring part of deciding what to cook. If you’re a 
+busy student looking for convenient meal ideas, [Meal Planner Name] helps you plan 
+efficient nutritious meals with ease.
