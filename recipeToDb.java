@@ -8,7 +8,6 @@
 1) compare recipe id with ids in db
 2) add recipe into db
  */
-import recipe;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

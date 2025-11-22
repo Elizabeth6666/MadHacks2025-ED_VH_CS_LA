@@ -45,19 +45,17 @@ class Recipe {
         for (int i=0; i < ingredients.size(); i++) {
             if (ingredients.get(i).getNameIngredient().equalsIgnoreCase(ingredient)) {
                 return ingredients.get(i).getAmountNumber();
-            } else {
-                return -1;
             }
         }
+        return -1;
     }
     public String getIngredientMeasurement(String ingredient) {
         for (int i=0; i < ingredients.size(); i++) {
             if (ingredients.get(i).getNameIngredient().equalsIgnoreCase(ingredient)) {
                 return ingredients.get(i).getMeasurement();
-            } else {
-                return "None";
             }
         }
+        return "None";
     }
 
     // Recipe Accessors

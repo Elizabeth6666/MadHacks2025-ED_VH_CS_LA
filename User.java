@@ -34,7 +34,7 @@ public class User {
       return isStudent;
   }
   public void setStudent(boolean isStudent) {
-      this.isStudent = isStudent
+      this.isStudent = isStudent;
   }
   public ArrayList<Recipe> getFavoriteRecipes() {
       return favoriteRecipes;
@@ -50,7 +50,7 @@ public class User {
   public void removeAllergy(String allergen) {
       allergies.remove(allergen);
   }
-  public void addFavoriteRecipe(Recipe Recipe) {
+  public void addFavoriteRecipe(Recipe recipe) {
     favoriteRecipes.add(recipe);
   }
   public void removeFavoriteRecipe(Recipe recipe) {
