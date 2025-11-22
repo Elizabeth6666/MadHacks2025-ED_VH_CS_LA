@@ -3,4 +3,4 @@
 -- INSERT INTO recipe (recName, ingredient)
 -- VALUES ("TEST", "Test2");
 
-SELECT * FROM RECIPE
+-- SELECT * FROM RECIPE
