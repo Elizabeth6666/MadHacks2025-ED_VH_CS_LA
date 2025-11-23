@@ -27,10 +27,11 @@ public class RecipeToDB {
     public void checkDB() {
         Connection conn = null;
         try {
+            Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:recipe.db");
             System.out.println("Connection created");
         } catch (Exception e) {
-            ;
+            System.out.println(e.getMessage());
         } finally {
             if (conn !=  null) {
                 try {
@@ -40,6 +41,7 @@ public class RecipeToDB {
                 }
             }
         }
+        
     }
     
 }
