@@ -1,0 +1,28 @@
+ html{ 
+    border: 10px solid green;
+    background-color: #9bb79b;
+    padding: 100px;
+}
+#status{
+    margin: 20px;
+    font-size: 40px;
+    text-align: center;
+}
+h1{
+    font-family: 'Baskerville', serif;
+    text-align: center;
+}
+p{
+    font-family: 'Tahoma', sans-serif;
+    text-align: center;
+}
+body {
+    background: #9bb79b;
+    text-align: center;
+    padding: 40px;
+}
+.button{
+  display: block;
+  margin: 0 auto; /* Sets top/bottom margin to 0 and left/right margin to auto */
+}
+
