@@ -1,0 +1,21 @@
+html{
+    background-color: #9bb79b;
+    margin-top: 0px
+}
+form{
+    width: 400px;
+    margin:0 auto;
+    text-align: center;
+}
+label{
+    font-size: 30px;
+    text-align: center;
+    display:block;
+}
+input{
+    display: block;
+    margin: 10px auto;
+}
+h1{
+    text-align: center;
+}
