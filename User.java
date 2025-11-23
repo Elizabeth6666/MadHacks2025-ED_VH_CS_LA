@@ -63,7 +63,7 @@ public class User {
     return "User: " + username +
             "\nStudent: " + isStudent +
             "\nAllergies: " + allergies +
-            "\nPreferred Methods (oven, airfryer, stove, microwave): " + methods +
+            "\nPreferred Methods (oven, airfryer, stove, microwave, no cook, fridge): " + methods +
             "\nFavorite Recipes: " + favoriteRecipes.size();
   }
 }
