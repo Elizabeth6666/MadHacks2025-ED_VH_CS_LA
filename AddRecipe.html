@@ -6,9 +6,46 @@
   <title>Document</title>
 <head>
 <body>
-  <div>
-  <button>Add Recipe</button>
-  <a href="addrecipepage.html">link to add a recipe page</a>
-  </div>
+
+  <form action="HandleInput.java" method="GET">
+
+    <label for="RecipeName">Recipe Name</label>
+    <input type="text" id="RecipeName" name="RecipeName" maxlength="50" required><br>
+
+    <label for="CookTime">Cook Time</label>
+    <input type="text" id="CookTime" name="CookTime" maxlength="3" required><br>
+
+    <label for="Allergens">Allergens</label>
+    <select id="Allergens" name="Allergens">
+        <option value="Gluten">Gluten</option>
+        <option value="Lactose">Lactose</option>
+        <option value="Eggs">Eggs</option>
+        <option value="Nuts">Nuts</option>
+        <option value="SeaFood">Sea Food</option>
+        <option value="Sugar">Sugar</option>
+    </select><br>
+
+    <label for="CookMethod">Cook Method</label>
+    <select id="CookMethod" name="CookMethod">
+        <option value="Oven">Oven</option>
+        <option value="AirFryer">Air Fryer</option>
+        <option value="Stove">Stove</option>
+        <option value="Microwave">Microwave</option>
+        <option value="NoCook">No Cook</option>
+        <option value="Fridge">Fridge</option>
+    </select><br>
+
+    <label for="Ingredients">Ingredients</label>
+    <input type="text" id="Ingredients" name="Ingredients" required><br>
+
+    <label for="Instructions">Recipe Instructions</label>
+    <input type="text" id="Instructions" name="Instructions" required><br>
+
+    
+
+    <input type="submit"><br>
+
+  </form>
+
 </body>
 </head>
