@@ -7,7 +7,7 @@ public final class mainMethod {
     testRecipe.addAllergens("C");
     testRecipe.addCookMethod("Oven");
     testRecipe.addCookingTime(20.0);
-    testRecipe.addIngredient("D", 1, "Cup");
+    testRecipe.addIngredient("D");
     System.out.println("Hello");
     RecipeToDB testRecToDB = new RecipeToDB(testRecipe);
   }

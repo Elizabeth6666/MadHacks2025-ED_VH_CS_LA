@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 class Recipe {
-    private ArrayList<Ingredient> ingredients = new ArrayList<>();  // Ingredients
+    private ArrayList<String> ingredients = new ArrayList<>();  // Ingredients
     private String recipeName;                                      // Recipe Name
     private ArrayList<String> allergens = new ArrayList<>();        // Allergens
     private double cookTimeInMinutes;                               // Cook Time in Minutes
@@ -14,8 +14,8 @@ class Recipe {
     }
 
     // Mutators
-    public void addIngredient(String ingredient, int amountNumber, String measurement) {
-        ingredients.add(new Ingredient(ingredient, amountNumber, measurement));
+    public void addIngredient(String ingredient) {
+        ingredients.add(ingredient);
     }
     public void addCookingTime(double cookTimeInMinutes) {
         this.cookTimeInMinutes = cookTimeInMinutes;
@@ -28,7 +28,7 @@ class Recipe {
     }
     public void removeIngredient(String ingredient) {
         for (int i=0; i < ingredients.size(); i++) {
-            if (ingredients.get(i).getNameIngredient().equalsIgnoreCase(ingredient)) {
+            if (ingredients.get(i).equalsIgnoreCase(ingredient)) {
                 ingredients.remove(i);
                 break;
             }
@@ -45,25 +45,25 @@ class Recipe {
     }
 
     // Ingredient Accessors
-    public int getIngredientAmount(String ingredient) {
-        for (int i=0; i < ingredients.size(); i++) {
-            if (ingredients.get(i).getNameIngredient().equalsIgnoreCase(ingredient)) {
-                return ingredients.get(i).getAmountNumber();
-            }
-        }
-        return -1;
-    }
-    public String getIngredientMeasurement(String ingredient) {
-        for (int i=0; i < ingredients.size(); i++) {
-            if (ingredients.get(i).getNameIngredient().equalsIgnoreCase(ingredient)) {
-                return ingredients.get(i).getMeasurement();
-            }
-        }
-        return "None";
-    }
+    // public int getIngredientAmount(String ingredient) {
+    //     for (int i=0; i < ingredients.size(); i++) {
+    //         if (ingredients.get(i).equalsIgnoreCase(ingredient)) {
+    //             return ingredients.get(i).getAmountNumber();
+    //         }
+    //     }
+    //     return -1;
+    // }
+    // public String getIngredientMeasurement(String ingredient) {
+    //     for (int i=0; i < ingredients.size(); i++) {
+    //         if (ingredients.get(i).getNameIngredient().equalsIgnoreCase(ingredient)) {
+    //             return ingredients.get(i).getMeasurement();
+    //         }
+    //     }
+    //     return "None";
+    // }
 
     // Recipe Accessors
-    public ArrayList<Ingredient> getIngredients() {
+    public ArrayList<String> getIngredients() {
         return ingredients;
     }
     public String getName() {
