@@ -32,7 +32,136 @@
             <option value="All">All</option>
         </select>
         <br>
-        <input type="submit" value="Search">
+       <button type="button" onclick="saveAndReload()">Submit</button>
     </form>
+<div id="status">Loading...</div>
+<div id="recipeDisplay"></div>
+
+<script>
+// Function to save form data to sessionStorage before reloading
+    function saveAndReload() {
+        const inputElements = document.querySelectorAll('input, select, textarea');
+        inputElements.forEach(element => {
+            sessionStorage.setItem(element.id || element.name, element.value);
+        });
+        window.location.reload();
+    }
+
+    // Function to restore form data from sessionStorage on page load
+    window.onload = function() {
+        const inputElements = document.querySelectorAll('input, select, textarea');
+        inputElements.forEach(element => {
+            const storedValue = sessionStorage.getItem(element.id || element.name);
+            if (storedValue !== null) {
+                if (element.type === 'checkbox' || element.type === 'radio') {
+                    element.checked = (storedValue === 'true');
+                } else {
+                    element.value = storedValue;
+                }
+            }
+        });
+        // Optional: Clear storage after restoration if you don't want data to persist across *manual* refreshes
+        // sessionStorage.clear(); 
+    }
+
+const csvUrl = "recipeOut.csv";
+
+fetch(csvUrl)
+    .then(response => response.text())
+    .then(csvText => {
+        document.getElementById("status").textContent = "Recipes Available";
+
+        // Get 
+        const allergenIn = document.getElementById('Allergens');
+        var allergenVal = allergenIn.value;
+        if (allergenVal == "None") {
+            allergenVal = "a";
+        }
+        const cookMethodIn = document.getElementById('CookMethod');
+        const cookMethodVal = cookMethodIn.value;
+
+        // Clean CSV text and split into lines
+        const lines = csvText.trim().split(/\r?\n/).filter(line => line.trim() !== "");
+
+        // Initialize HTML string
+        let html = "";
+
+        // Loop through all lines (all recipes)
+        lines.forEach(line => {
+            const values = line.split(",");
+            var add = true;
+
+            const id = values[0] || "";
+            const name = values[1] || "";
+            var ingredient = values[2] || "";
+            var ingredients = ""
+            while (ingredient.indexOf("_") > 0) {
+                ingredients += ingredient.substring(0, ingredient.indexOf("_")) + ", ";
+                ingredient = ingredient.substring(ingredient.indexOf("_") + 1);
+            }
+            ingredients += ingredient;
+
+            const cookingTime = values[3] || "";
+            const cookMethod = values[4] || "";
+            var allergen = values[5] || "";
+            var allergens = "";
+            var checkAllergen = "";
+            while (allergen.indexOf("_") > 0) {
+                checkAllergen = allergen.substring(0, allergen.indexOf("_"))
+                allergens += checkAllergen + ", ";
+                if (checkAllergen == allergenVal) {
+                    add = false;
+                }
+                allergen = allergen.substring(allergen.indexOf("_") + 1);
+            }
+            if (allergen.trim() == allergenVal.trim()) {
+                add = false;
+            }
+            allergens += allergen;
+
+
+            const instructions = values.slice(6).join(",") || "";
+            if (cookMethodVal == "All" && add) {
+                html += `
+                <div class="varBox"><strong>Name:</strong> ${name}</div>
+                <div class="varBox"><strong>Ingredient List:</strong> ${ingredients}</div>
+                <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
+                <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
+                <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
+                <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
+                <hr>
+            `;
+            } else if (cookMethodVal == "Dorm" && (cookMethod == "Microwave" || cookMethod == "Fridge" || cookMethod == "No Cook") && add) {
+                html += `
+                <div class="varBox"><strong>Name:</strong> ${name}</div>
+                <div class="varBox"><strong>Ingredient List:</strong> ${ingredients}</div>
+                <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
+                <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
+                <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
+                <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
+                <hr>
+            `;
+            } else if (cookMethod == cookMethodVal && add) {
+                html += `
+                <div class="varBox"><strong>Name:</strong> ${name}</div>
+                <div class="varBox"><strong>Ingredient List:</strong> ${ingredients}</div>
+                <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
+                <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
+                <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
+                <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
+                <hr>
+            `;
+            } 
+
+        });
+
+        // Insert all recipes into the page
+        document.getElementById("recipeDisplay").innerHTML = html;
+    })
+    .catch(err => {
+        document.getElementById("status").textContent = "Error loading recipeOut.csv";
+        console.error(err);
+    });
+</script>
 </body>
 </html>

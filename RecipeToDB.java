@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class RecipeToDB {
     private Recipe recipe;
     private String dBRecipe = "";
-    private String filePathIn = "recipeIn.csv";
     private String filePathOut = "recipeOut.csv";
     private BufferedWriter writer = null;
     private BufferedReader reader = null;
@@ -34,7 +33,7 @@ public class RecipeToDB {
                 return;
             }
         try {
-            reader = new BufferedReader(new FileReader(filePathIn));
+            reader = new BufferedReader(new FileReader(filePathOut));
             String line;
             String id;
             int count = 0;

@@ -7,6 +7,8 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 import java.net.InetSocketAddress;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class HandleInput {
 
@@ -44,7 +46,7 @@ public class HandleInput {
             String instructions = decode(getFirst(params.get("Instructions")));
 
             if (name == null || name.isEmpty()) {
-                return "{\"error\": \"Missing recipe name; nothing saved.\"}";
+                return renderTemplate("templates/success.html", "Error", "Missing recipe name; nothing saved.");
             }
 
             Recipe recipe = new Recipe(name);
@@ -69,27 +71,61 @@ public class HandleInput {
 
             new RecipeToDB(recipe);
 
-            return "{\"message\": \"Recipe saved successfully.\"}";
+            return renderTemplate("templates/success.html", "Success!", "the record was written");
 
         } catch (Exception e) {
-            return "{\"error\": \"Error saving recipe: " + e.getMessage() + "\"}";
+            return renderTemplate("templates/success.html", "Error", "Error saving recipe: " + e.getMessage());
+        }
+    }
+
+    private static String renderTemplate(String file, String arg1, String arg2) {
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(file)));
+            content = content.replace("{arg1}", arg1).replace("{arg2}", arg2);
+            return content;
+        } catch (Exception e) {
+            return "<html><body><h1>Error</h1><p>Template error: " + e.getMessage() + "</p></body></html>";
         }
     }
 
     static class SubmitHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
+            // Log request
+            System.out.println("=== REQUEST RECEIVED ===");
+            System.out.println("Method: " + exchange.getRequestMethod());
+            System.out.println("URI: " + exchange.getRequestURI());
+            System.out.println("Headers:");
+            exchange.getRequestHeaders().forEach((key, values) ->
+                System.out.println("  " + key + ": " + String.join(", ", values)));
+
             if ("POST".equals(exchange.getRequestMethod())) {
                 InputStream is = exchange.getRequestBody();
                 String body = new String(is.readAllBytes(), "UTF-8");
+                System.out.println("Body: " + body);
+
                 String response = processRecipe(body);
-                exchange.getResponseHeaders().set("Content-Type", "application/json");
+
+                // Log response
+                System.out.println("=== RESPONSE TO SEND ===");
+                System.out.println("Status: 200");
+                System.out.println("Content-Type: text/html");
+                System.out.println("Access-Control-Allow-Origin: *");
+                System.out.println("Body: " + response);
+                System.out.println("========================");
+
+                exchange.getResponseHeaders().set("Content-Type", "text/html");
                 exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
                 exchange.sendResponseHeaders(200, response.length());
                 OutputStream os = exchange.getResponseBody();
                 os.write(response.getBytes());
                 os.close();
             } else {
+                // Log response for method not allowed
+                System.out.println("=== RESPONSE TO SEND ===");
+                System.out.println("Status: 405");
+                System.out.println("========================");
+
                 exchange.sendResponseHeaders(405, -1); // Method not allowed
             }
         }

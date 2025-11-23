@@ -2,3 +2,7 @@ python -m http.server
 
 cd /workspaces/MadHacks2025-ED_VH_CS_LA
 python3 -m http.server 8000
+
+to compile: docker coompose build
+to run: docker compose up
+at: http://localhost:8000
