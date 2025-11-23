@@ -46,13 +46,16 @@ h2{
     text-align: center;
     margin-top: 60px;
 }
-h3{
-    text-align: center;
-    margin-top: 50px;
+.centered{
+    text-align:center;
 }
 .image_container{
     justify-content: center;
     display: flex;
     margin-top: 50px;
-    gap: 30px;
+    gap: 50px;
+}
+.image_container img{
+    border-radius: 15px;
+    border: 10px solid rgb(31, 176, 31)
 }
