@@ -10,13 +10,13 @@
   <form action="HandleInput.java" method="GET">
 
     <label for="RecipeName">Recipe Name</label>
-    <input type="text" id="RecipeName" maxlength="50" required>
+    <input type="text" id="RecipeName" name="RecipeName" maxlength="50" required>
 
     <label for="CookTime">Cook Time</label>
-    <input type="text" id="CookTime" maxlength="3" required>
+    <input type="text" id="CookTime" name="CookTime" maxlength="3" required>
 
     <label for="Allergens">Allergens</label>
-    <select>
+    <select id="Allergens" name="Allergens">
         <option value="Gluten">Gluten</option>
         <option value="Lactose">Lactose</option>
         <option value="Eggs">Eggs</option>
@@ -26,12 +26,10 @@
     </select><br>
 
     <label for="Ingredients">Ingredients</label>
-    <input type="text" id="Ingredients" required>
+    <input type="text" id="Ingredients" name="Ingredients" required>
 
     <label for="Instructions">Recipe Instructions</label>
-    <input type="text" id="Instructions" required>
-
-    
+    <input type="text" id="Instructions" name="Instructions" required>
 
     <input type="submit">
 

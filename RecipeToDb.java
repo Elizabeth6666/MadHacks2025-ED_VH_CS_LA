@@ -16,7 +16,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class RecipeToDB {
+public class RecipeToDb {
     private Recipe recipe;
     private String dBRecipe = "";
     private String filePath = "recipe.csv";
@@ -24,7 +24,7 @@ public class RecipeToDB {
     private BufferedReader reader = null;
     private ArrayList<String> idList = new ArrayList<String>();
 
-    public RecipeToDB(Recipe recipe) {
+    public RecipeToDb(Recipe recipe) {
         this.recipe = recipe;
         addToDB();
     }
