@@ -8,6 +8,8 @@ public class DBToRecipe {
     private String line;
     private String cookMethod;
     private String allergen;
+    private String filePathIn = "recipeIn.csv";
+    private String filePathOut = "recipeOut.csv";
 
     public DBToRecipe(String cookMethodIn, String allergenIn) {
         this.cookMethod = cookMethodIn;
@@ -17,9 +19,8 @@ public class DBToRecipe {
 
     public void getAll() {
         BufferedReader reader = null;
-        String filePath = "recipe.csv";
         try {
-            reader = new BufferedReader(new FileReader(filePath));
+            reader = new BufferedReader(new FileReader(filePathIn));
             Recipe recipe;
             String line;
             String subLine;

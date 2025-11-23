@@ -19,7 +19,8 @@ import java.util.ArrayList;
 public class RecipeToDB {
     private Recipe recipe;
     private String dBRecipe = "";
-    private String filePath = "recipe.csv";
+    private String filePathIn = "recipeIn.csv";
+    private String filePathOut = "recipeOut.csv";
     private BufferedWriter writer = null;
     private BufferedReader reader = null;
 
@@ -33,7 +34,7 @@ public class RecipeToDB {
                 return;
             }
         try {
-            reader = new BufferedReader(new FileReader(filePath));
+            reader = new BufferedReader(new FileReader(filePathIn));
             String line;
             String id;
             int count = 0;
@@ -54,7 +55,7 @@ public class RecipeToDB {
             } 
         }
         try {
-            writer = new BufferedWriter( new FileWriter(filePath,true));
+            writer = new BufferedWriter( new FileWriter(filePathOut,true));
             dBRecipe += recipe.getRecipeID() + ",";
             dBRecipe += recipe.getName() + ",";
             ArrayList<String> ingredients;
