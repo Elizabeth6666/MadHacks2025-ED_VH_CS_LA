@@ -20,6 +20,10 @@ public class Ingredient {
       return measurement;
     }
 
+    public String toString() {
+      return nameIngredient + "-" + amountNumber + "-" + measurement;
+    }
+
     // Mutators
     public void changeAmount(int amountNumber) {
        this.amountNumber = amountNumber;
