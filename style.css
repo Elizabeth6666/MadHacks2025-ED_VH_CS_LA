@@ -2,20 +2,21 @@
     box-sizing: border-box;
     margin: 10;
     padding: 0;
-    font-family: 'Arial', sans-serif; 
 }
 .navbar {
+    font-family: 'Georgia', serif; 
     background: black;
     padding: 0 20px;
     height: 80px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 }
 #navbar_logo{
-    font-size: 35px;
+    font-size: 70px;
     color: green;
     text-align: left;
+    text-decoration: none;
 }
 .navbar_menu{
     display:flex;
@@ -28,6 +29,7 @@
 .navbar_links{
     color: white;
     font-size: 18px;
+    text-decoration: none;
 }
 .navbar_container{
     display: flex;
@@ -35,4 +37,22 @@
     height: 80px;
     width: 100%;
     max-width: 1300px;
+}
+h1{
+    text-align: center;
+    margin-top: 70px;
+}
+h2{
+    text-align: center;
+    margin-top: 60px;
+}
+h3{
+    text-align: center;
+    margin-top: 50px;
+}
+.image_container{
+    justify-content: center;
+    display: flex;
+    margin-top: 50px;
+    gap: 30px;
 }
