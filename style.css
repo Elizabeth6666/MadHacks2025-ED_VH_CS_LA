@@ -8,12 +8,25 @@
     background: black;
     height: 80px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
 }
 .navbar_logo{
     text-align: left;
 }
-.navbar-container{
+.navbar_menu{
+    display:flex;
+    list-style: none;
+    align-items: center;
+}
+.navbar_item{
+    margin-left:20px;
+}
+.navbar_links{
+    color: white;
+    font-size: 18px;
+}
+.navbar_container{
     display: flex;
     justify-content: space-between;
     height: 80px;
