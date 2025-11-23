@@ -12,6 +12,8 @@
     align-items: center;
 }
 .navbar_logo{
+    font-size: 24px;
+    color: green;
     text-align: left;
 }
 .navbar_menu{
