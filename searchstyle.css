@@ -1,6 +1,6 @@
 html{
-    background-color: #9bb79b;
-    margin-top: 0px
+    border: 10px solid green;
+    margin-top: 0px;
 }
 form{
     width: 400px;
@@ -10,7 +10,7 @@ form{
 label{
     font-size: 30px;
     text-align: center;
-    display:block;
+    display: block;
 }
 input{
     display: block;
@@ -44,4 +44,18 @@ h1{
     gap: 8px;                /* space between items inside recipe */
     background-color: #f9f9f9;
     flex-wrap: wrap;
+}
+
+#title {
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 8px;
+}
+
+#status {
+    font-size: 30px;
+    border-bottom: 20px;
+    padding-bottom: 15px;
+    font-weight:bold;
+    padding-left: 115px;
 }

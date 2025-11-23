@@ -129,7 +129,7 @@ fetch(csvUrl)
             if (cookMethodVal == "All" && add) {
                 html += `
                 <div class = "recipe">
-                    <div class="varBox"><strong>Name:</strong> ${name}</div>
+                    <div class="varBox" id="title"><strong>${name}</strong></div>
                     <div class="varBox"><strong>Ingredient List:</strong> ${ingredients}</div>
                     <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
                     <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
@@ -141,7 +141,7 @@ fetch(csvUrl)
                 html += `
                 <div id= "recipeDisplay">
                     <div class = "recipe">
-                        <div class="varBox"><strong>Name:</strong> ${name}</div>
+                        <div class="varBox" id="title"><strong>${name}</strong></div>
                         <div class="varBox"><strong>Ingredient List:</strong> ${ingredients}</div>
                         <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
                         <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
@@ -154,7 +154,7 @@ fetch(csvUrl)
                 html += `
                 <div id= "recipeDisplay">
                     <div class = "recipe">
-                        <div class="varBox"><strong>Name:</strong> ${name}</div>
+                        <div class="varBox" id="title"><strong>${name}</strong></div>
                         <div class="varBox"><strong>Ingredient List:</strong> ${ingredients}</div>
                         <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
                         <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
