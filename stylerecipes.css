@@ -1,0 +1,36 @@
+ html{ 
+    border: 10px solid green;
+    padding: 100px;
+}
+#status{
+    margin: 20px;
+    font-size: 40px;
+    text-align: center;
+}
+
+#recipeBox {
+    display: flex;           /* align recipe boxes horizontally */
+    flex-wrap: wrap;         /* wrap to next row when no space */
+    gap: 20px;               /* space between recipe boxes */
+    justify-content: center; /* center the row */
+}
+
+#recipeDisplay {
+    display: flex;           /* align recipe boxes horizontally */
+    flex-wrap: wrap;         /* wrap to next row when no space */
+    gap: 20px;               /* space between recipe boxes */
+    justify-content: center;
+}
+
+.recipe {
+    width: 300px;            /* fixed width for each recipe box */
+    border: 2px solid black; /* visible box */
+    padding: 15px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;  /* stack inner items vertically */
+    gap: 8px;                /* space between items inside recipe */
+    background-color: #f9f9f9;
+    flex-wrap: wrap;
+}
