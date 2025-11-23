@@ -1,8 +1,21 @@
-<html>
+ <!DOCTYPE html>
+ <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>myRecipes</title>
+        <link rel="stylesheet" href="stylerecipes.css">
+    </head>
+    <body>
+        
+    </body>
+    </html>
     <button onclick ="location.href='index.html'">Home</button>
 <body>
 <div id="status">Loading...</div>
-<div id="recipeDisplay"></div>
+<div id="recipeBox">
+    <div id="recipeDisplay"></div>
+</div>
 
 <script>
 const csvUrl = "recipeOut.csv";
@@ -32,13 +45,16 @@ fetch(csvUrl)
             const instructions = values.slice(6).join(",") || "";
 
             html += `
-                <div class="varBox"><strong>Name:</strong> ${name}</div>
-                <div class="varBox"><strong>Ingredient List:</strong> ${ingredient}</div>
-                <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
-                <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
-                <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
-                <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
-                <hr>
+            <div id= "recipeDisplay">
+                <div class = "recipe">
+                    <div class="varBox"><strong>Name:</strong> ${name}</div>
+                    <div class="varBox"><strong>Ingredient List:</strong> ${ingredient}</div>
+                    <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
+                    <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
+                    <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
+                    <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
+                </div>
+            </div>
             `;
         });
 
