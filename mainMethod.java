@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public final class mainMethod {
   private mainMethod() {}
   public static void main(String[] args) {
@@ -11,5 +13,9 @@ public final class mainMethod {
     // System.out.println("Hello");
     // RecipeToDB testRecToDB = new RecipeToDB(testRecipe);
     DBToRecipe test = new DBToRecipe("Oven","Gluten");
+    ArrayList<Recipe> banana = test.sort();
+    for (Recipe apple : banana) {
+      System.out.println(apple);
+    }
   }
 }
