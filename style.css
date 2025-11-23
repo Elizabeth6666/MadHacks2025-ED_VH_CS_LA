@@ -1,6 +1,6 @@
 *{
     box-sizing: border-box;
-    margin: 0;
+    margin: 10;
     padding: 0;
     font-family: 'Arial', sans-serif; 
 }
@@ -8,9 +8,27 @@
     background: black;
     height: 80px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
 }
-.navbar-container{
+#navbar_logo{
+    font-size: 24px;
+    color: green;
+    text-align: left;
+}
+.navbar_menu{
+    display:flex;
+    list-style: none;
+    align-items: center;
+}
+.navbar_item{
+    margin-left:20px;
+}
+.navbar_links{
+    color: white;
+    font-size: 18px;
+}
+.navbar_container{
     display: flex;
     justify-content: space-between;
     height: 80px;
