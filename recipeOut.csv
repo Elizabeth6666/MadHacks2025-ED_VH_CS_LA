@@ -1,1 +1,4 @@
 ID0,Banana Bread,banana_flour_sugar_eggs_milk,45.0,Oven,Gluten_Lactose_Eggs_Sugar,bake
+ID1,Cake,flour_sugar_milk_eggs,60.0,Oven,Gluten_Lactose_Eggs_Sugar,bake
+ID2,Tacos,meat_tortilla_cheese,15.0,Stove,Gluten_Lactose_Vegetarian,make on stove
+ID3,Sandwitch,peanut butter_jelly_bread,5.0,NoCook,Gluten_Nuts,make sandwitch
