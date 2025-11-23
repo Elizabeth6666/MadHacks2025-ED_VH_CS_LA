@@ -6,13 +6,14 @@
 }
 .navbar {
     background: black;
+    padding: 0 20px;
     height: 80px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 #navbar_logo{
-    font-size: 24px;
+    font-size: 35px;
     color: green;
     text-align: left;
 }
@@ -22,7 +23,7 @@
     align-items: center;
 }
 .navbar_item{
-    margin-left:20px;
+    margin-left:45px;
 }
 .navbar_links{
     color: white;
