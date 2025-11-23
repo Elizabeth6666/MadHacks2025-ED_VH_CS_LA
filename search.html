@@ -35,7 +35,9 @@
        <button type="button" onclick="saveAndReload()">Submit</button>
     </form>
 <div id="status">Loading...</div>
-<div id="recipeDisplay"></div>
+<div id="recipeBox"></div>
+    <div id="recipeDisplay"></div>
+</div>
 
 <script>
 // Function to save form data to sessionStorage before reloading
@@ -123,33 +125,40 @@ fetch(csvUrl)
             const instructions = values.slice(6).join(",") || "";
             if (cookMethodVal == "All" && add) {
                 html += `
-                <div class="varBox"><strong>Name:</strong> ${name}</div>
-                <div class="varBox"><strong>Ingredient List:</strong> ${ingredients}</div>
-                <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
-                <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
-                <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
-                <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
-                <hr>
+                <div class = "recipe">
+                    <div class="varBox"><strong>Name:</strong> ${name}</div>
+                    <div class="varBox"><strong>Ingredient List:</strong> ${ingredients}</div>
+                    <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
+                    <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
+                    <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
+                    <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
+                </div>
             `;
             } else if (cookMethodVal == "Dorm" && (cookMethod == "Microwave" || cookMethod == "Fridge" || cookMethod == "No Cook") && add) {
                 html += `
-                <div class="varBox"><strong>Name:</strong> ${name}</div>
-                <div class="varBox"><strong>Ingredient List:</strong> ${ingredients}</div>
-                <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
-                <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
-                <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
-                <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
-                <hr>
+                <div id= "recipeDisplay">
+                    <div class = "recipe">
+                        <div class="varBox"><strong>Name:</strong> ${name}</div>
+                        <div class="varBox"><strong>Ingredient List:</strong> ${ingredients}</div>
+                        <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
+                        <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
+                        <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
+                        <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
+                    </div>
+                </div>
             `;
             } else if (cookMethod == cookMethodVal && add) {
                 html += `
-                <div class="varBox"><strong>Name:</strong> ${name}</div>
-                <div class="varBox"><strong>Ingredient List:</strong> ${ingredients}</div>
-                <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
-                <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
-                <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
-                <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
-                <hr>
+                <div id= "recipeDisplay">
+                    <div class = "recipe">
+                        <div class="varBox"><strong>Name:</strong> ${name}</div>
+                        <div class="varBox"><strong>Ingredient List:</strong> ${ingredients}</div>
+                        <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
+                        <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
+                        <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
+                        <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
+                    </div>
+                </div>
             `;
             } 
 
