@@ -1,51 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Recipe Website</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <nav class = "navbar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Website</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles for recipe variables */
+        .varBox {
+            background: #f4f4f4;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        .varBox strong { color: #444; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
         <div class="navbar_container">
-            <a href = "" id="navbar_logo">
-                Recipe Hub
-            </a>
-            <div class="navbar_toggle" id = "website-menu">
+            <a href="" id="navbar_logo">Recipe Hub</a>
+            <div class="navbar_toggle" id="website-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
         </div>  
-        <ul class = "navbar_menu">
-            <li class = "navbar_item">
-                <a href=""class="navbar_links">
-                My Recipes  
-                </a>
-            </li>
-            <li class = "navbar_item">
-                <a href="AddRecipe.html"class="navbar_links">
-                Upload Recipes  
-                </a>
-            </li>
-            <li class = "navbar_item">
-                <a href="search.html"class="navbar_links">
-                Search 
-                </a>
-            </li>
+        <ul class="navbar_menu">
+            <li class="navbar_item"><a href="" class="navbar_links">My Recipes</a></li>
+            <li class="navbar_item"><a href="AddRecipe.html" class="navbar_links">Upload Recipes</a></li>
+            <li class="navbar_item"><a href="search.html" class="navbar_links">Search</a></li>
         </ul>
-        </nav>
-        <div class="description">
-            <h1 style="font-family: 'Georgia', serif;">Welcome to Recipe Hub</h1>
-            <h2 style="font-family: 'Baskerville', serif;">What is Recipe Hub?</h2>
-            <p class = "centered" style="font-family: 'Tahoma', sans-serif;">Recipe Hub is a website that allows you to upload and search through various recipes</p>
-        </div>
-        <div class="image_container">
-            <img src="https://www.chp.gov.hk/files/jpg/adult_eng.jpg" width = "400px" height = "250px" alt="Delicious Food">
-            <img src="https://assets.clevelandclinic.org/transform/LargeFeatureImage/98c65686-0976-41a4-9e1a-0600a133815d/food-noise-1253633323" width = "400px" height = "250px" alt="Delicious Food">
-            <img src="https://cookanyday.com/cdn/shop/articles/Blog_Dorm-Cooking.jpg?v=1659641068" width = "400px" height = "250px" alt="Delicious Food">
-        </div>
-    </body>
-</html>
+    </nav>
 
+    <div class="description">
+        <h1 style="font-family: 'Georgia', serif;">Welcome to Recipe Hub</h1>
+        <h2 style="font-family: 'Baskerville', serif;">What is Recipe Hub?</h2>
+        <p class="centered" style="font-family: 'Tahoma', sans-serif;">Recipe Hub is a website that allows you to upload and search through various recipes</p>
+    </div>
+
+    <div class="image_container">
+        <img src="https://www.chp.gov.hk/files/jpg/adult_eng.jpg" width="400" height="250" alt="Delicious Food">
+        <img src="https://assets.clevelandclinic.org/transform/LargeFeatureImage/98c65686-0976-41a4-9e1a-0600a133815d/food-noise-1253633323" width="400" height="250" alt="Delicious Food">
+        <img src="https://cookanyday.com/cdn/shop/articles/Blog_Dorm-Cooking.jpg?v=1659641068" width="400" height="250" alt="Delicious Food">
+    </div>
+
+    <div id="status">Loading...</div>
+<div id="recipeDisplay"></div>
+
+<script>
+const csvUrl = "recipeOut.csv";
+
+fetch(csvUrl)
+    .then(response => response.text())
+    .then(csvText => {
+        document.getElementById("status").textContent = "Loaded:";
+
+        // Clean CSV text and split into lines
+        const lines = csvText.trim().split(/\r?\n/).filter(line => line.trim() !== "");
+
+        // Initialize HTML string
+        let html = "";
+
+        // Loop through all lines (all recipes)
+        lines.forEach(line => {
+            const values = line.split(",");
+
+            const id = values[0] || "";
+            const name = values[1] || "";
+            const ingredient = values[2] || "";
+            const cookingTime = values[3] || "";
+            const cookMethod = values[4] || "";
+            const allergens = values[5] || "";
+
+            const instructions = values.slice(6).join(",") || "";
+
+            html += `
+                <div class="varBox"><strong>Name:</strong> ${name}</div>
+                <div class="varBox"><strong>Ingredient List:</strong> ${ingredient}</div>
+                <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
+                <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
+                <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
+                <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
+                <hr>
+            `;
+        });
+
+        // Insert all recipes into the page
+        document.getElementById("recipeDisplay").innerHTML = html;
+    })
+    .catch(err => {
+        document.getElementById("status").textContent = "Error loading recipeOut.csv";
+        console.error(err);
+    });
+</script>
+
+</body>
+</html>
