@@ -37,10 +37,22 @@ fetch(csvUrl)
 
             const id = values[0] || "";
             const name = values[1] || "";
-            const ingredient = values[2] || "";
+            var ingredient = values[2] || "";
+            var ingredients = ""
+            while (ingredient.indexOf("_") > 0) {
+                ingredients += ingredient.substring(0, ingredient.indexOf("_")) + ", ";
+                ingredient = ingredient.substring(ingredient.indexOf("_") + 1);
+            }
+            ingredients += ingredient;
             const cookingTime = values[3] || "";
             const cookMethod = values[4] || "";
-            const allergens = values[5] || "";
+            var allergen = values[5] || "";
+            var allergens = ""
+            while (allergen.indexOf("_") > 0) {
+                allergens += allergen.substring(0, allergen.indexOf("_")) + ", ";
+                allergen = allergen.substring(allergen.indexOf("_") + 1);
+            }
+            allergens += allergen;
 
             const instructions = values.slice(6).join(",") || "";
 
