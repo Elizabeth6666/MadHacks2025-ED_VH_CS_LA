@@ -6,13 +6,11 @@ class Recipe {
     private ArrayList<String> allergens = new ArrayList<>();        // Allergens
     private double cookTimeInMinutes;                               // Cook Time in Minutes
     private String cookMethod;                                      // Cook Method (No cook, microwave, oven, etc)
-    private static int counterRecipe = 1;
     private String recipeID = "ID";       
+    private String instructions = "";
 
     public Recipe(String name) {
         this.recipeName = name;
-        recipeID = recipeID + counterRecipe;
-        counterRecipe += 1;
     }
 
     // Mutators
@@ -38,6 +36,12 @@ class Recipe {
     }
     public void removeAllergen(String allergen) {
         allergens.remove(allergen);
+    }
+    public void setID(String id) {
+        this.recipeID = id;
+    }
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 
     // Ingredient Accessors
@@ -76,5 +80,8 @@ class Recipe {
     }
     public ArrayList<String> getAllergens() {
         return allergens;
+    }
+    public String getInstructions() {
+        return instructions;
     }
 }
