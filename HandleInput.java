@@ -7,6 +7,8 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 import java.net.InetSocketAddress;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class HandleInput {
 
@@ -30,8 +32,6 @@ public class HandleInput {
         }
     }
 
-    private static final String HTML_TEMPLATE = "<html><body><h1>%s</h1><p>%s</p></body></html>";
-
     private static String processRecipe(String query) {
         try {
             Map<String, String[]> params = parseQuery(query);
@@ -46,7 +46,7 @@ public class HandleInput {
             String instructions = decode(getFirst(params.get("Instructions")));
 
             if (name == null || name.isEmpty()) {
-                return String.format(HTML_TEMPLATE, "Error", "Missing recipe name; nothing saved.");
+                return renderTemplate("templates/success.html", "Error", "Missing recipe name; nothing saved.");
             }
 
             Recipe recipe = new Recipe(name);
@@ -71,10 +71,20 @@ public class HandleInput {
 
             new RecipeToDB(recipe);
 
-            return String.format(HTML_TEMPLATE, "Success!", "the record was written");
+            return renderTemplate("templates/success.html", "Success!", "the record was written");
 
         } catch (Exception e) {
-            return String.format(HTML_TEMPLATE, "Error", "Error saving recipe: " + e.getMessage());
+            return renderTemplate("templates/success.html", "Error", "Error saving recipe: " + e.getMessage());
+        }
+    }
+
+    private static String renderTemplate(String file, String arg1, String arg2) {
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(file)));
+            content = content.replace("{arg1}", arg1).replace("{arg2}", arg2);
+            return content;
+        } catch (Exception e) {
+            return "<html><body><h1>Error</h1><p>Template error: " + e.getMessage() + "</p></body></html>";
         }
     }
 

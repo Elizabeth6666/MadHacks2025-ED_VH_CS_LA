@@ -5,6 +5,7 @@ services:
     volumes:
       - ./recipeIn.csv:/app/recipeIn.csv
       - ./recipeOut.csv:/app/recipeOut.csv
+      - ./templates:/app/templates
     stdin_open: true
     tty: true
 
