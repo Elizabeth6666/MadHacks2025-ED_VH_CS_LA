@@ -9,3 +9,13 @@ services:
       - ./recipeOut.csv:/app/recipeOut.csv
     stdin_open: true
     tty: true
+
+  caddy:
+    image: caddy:latest
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/usr/share/caddy/html
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    depends_on:
+      - recipe-app

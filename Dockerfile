@@ -19,5 +19,8 @@ RUN echo '#!/bin/bash\njava HandleInput "$@"' > run.sh && chmod +x run.sh
 # Expose any ports if needed (though this is command-line only)
 # EXPOSE 8000
 
+# Expose port for API
+EXPOSE 8080
+
 # Set entrypoint
 ENTRYPOINT ["./run.sh"]

@@ -216,15 +216,15 @@ The system follows a simple layered architecture:
 - CGI setup for Java execution
 
 ### Running the Application
-1. Start web server: `python -m http.server`
+1. Run `docker-compose up` to start both frontend (Caddy on port 8000) and backend (API on port 8080)
 2. Access `index.html` at `http://localhost:8000`
-3. For CGI: Configure server to execute Java classes on `/submit` endpoint
-4. Command line: `java mainMethod` or use Docker: `docker run --rm -v $(pwd)/recipeIn.csv:/app/recipeIn.csv -v $(pwd)/recipeOut.csv:/app/recipeOut.csv madhacks-recipe-app "query_string"`
+3. Forms submit POST requests to `/submit` (proxied to API)
+4. Command line: `java HandleInput "query_string"` or Docker with arguments
 
 ### Testing
-- Add recipes via web form or Docker command
-- Run `mainMethod` or Docker container to verify console output
-- Check CSV files for data persistence
+- Add recipes via web form (submits to API)
+- Check API responses and CSV files for data persistence
+- Use command-line mode for direct testing
 
 ## Conclusion
 

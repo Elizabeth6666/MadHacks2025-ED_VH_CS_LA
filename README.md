@@ -4,10 +4,11 @@ A Java-based recipe management system for students with dietary restrictions and
 
 ## Features
 
-- Recipe submission and storage
+- Recipe submission and storage via REST API
 - Filtering by allergens and cooking methods
-- Web interface and command-line tools
-- Docker containerization
+- Web interface with HTML forms
+- Command-line tools and Docker containerization
+- Volume-mounted CSV data persistence
 
 ## Documentation
 
@@ -16,4 +17,12 @@ A Java-based recipe management system for students with dietary restrictions and
 
 ## Quick Start
 
-See [Docker_README.md](Docker_README.md) for Docker instructions.
+Run the full application with Docker Compose:
+
+```bash
+docker-compose up
+```
+
+Then visit `http://localhost:8000` in your browser.
+
+See [Docker_README.md](Docker_README.md) for more details.

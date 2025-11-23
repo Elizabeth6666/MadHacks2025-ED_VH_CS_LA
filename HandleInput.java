@@ -2,17 +2,36 @@ import java.net.URLDecoder;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import com.sun.net.httpserver.HttpServer;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpExchange;
+import java.net.InetSocketAddress;
+import java.io.*;
 
 public class HandleInput {
 
     public static void main(String[] args) {
-        try {
-            // GET query string from CGI environment
-            String query = System.getenv("QUERY_STRING");
-            if ((query == null || query.isEmpty()) && args.length > 0) {
-                query = args[0];
+        if (args.length > 0) {
+            // Command line mode
+            String query = args[0];
+            String result = processRecipe(query);
+            System.out.println(result);
+        } else {
+            // API server mode
+            try {
+                HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+                server.createContext("/submit", new SubmitHandler());
+                server.setExecutor(null);
+                server.start();
+                System.out.println("Server started on port 8080");
+            } catch (Exception e) {
+                System.err.println("Error starting server: " + e.getMessage());
             }
+        }
+    }
 
+    private static String processRecipe(String query) {
+        try {
             Map<String, String[]> params = parseQuery(query);
 
             String name = decode(getFirst(params.get("RecipeName")));
@@ -25,8 +44,7 @@ public class HandleInput {
             String instructions = decode(getFirst(params.get("Instructions")));
 
             if (name == null || name.isEmpty()) {
-                outputHtml("Missing recipe name; nothing saved.");
-                return;
+                return "{\"error\": \"Missing recipe name; nothing saved.\"}";
             }
 
             Recipe recipe = new Recipe(name);
@@ -51,10 +69,29 @@ public class HandleInput {
 
             new RecipeToDB(recipe);
 
-            outputHtml("Recipe saved successfully.");
+            return "{\"message\": \"Recipe saved successfully.\"}";
 
         } catch (Exception e) {
-            outputHtml("Error saving recipe: " + e.getMessage());
+            return "{\"error\": \"Error saving recipe: " + e.getMessage() + "\"}";
+        }
+    }
+
+    static class SubmitHandler implements HttpHandler {
+        @Override
+        public void handle(HttpExchange exchange) throws IOException {
+            if ("POST".equals(exchange.getRequestMethod())) {
+                InputStream is = exchange.getRequestBody();
+                String body = new String(is.readAllBytes(), "UTF-8");
+                String response = processRecipe(body);
+                exchange.getResponseHeaders().set("Content-Type", "application/json");
+                exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
+                exchange.sendResponseHeaders(200, response.length());
+                OutputStream os = exchange.getResponseBody();
+                os.write(response.getBytes());
+                os.close();
+            } else {
+                exchange.sendResponseHeaders(405, -1); // Method not allowed
+            }
         }
     }
 

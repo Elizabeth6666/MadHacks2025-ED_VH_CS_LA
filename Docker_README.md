@@ -12,17 +12,21 @@ This Docker container runs the Java-based recipe management system that processe
 docker build -t madhacks-recipe-app .
 ```
 
-## Running the Container
+## Running the Application
 
-### Option 1: Using Docker Compose (if available)
+### Using Docker Compose (recommended)
 
 ```bash
 docker-compose up
 ```
 
-### Option 2: Using Docker Run (recommended)
+This starts both the API backend and the Caddy web server:
+- Frontend served at `http://localhost:8000`
+- API available at `http://localhost:8080` (proxied through Caddy)
 
-To run the container with a recipe submission query string:
+### Using Docker Run (for API only)
+
+To run just the API container with a recipe submission query string:
 
 ```bash
 docker run --rm -v $(pwd)/recipeIn.csv:/app/recipeIn.csv -v $(pwd)/recipeOut.csv:/app/recipeOut.csv madhacks-recipe-app "RecipeName=Chocolate+Cake&CookTime=45&CookMethod=Baking&Allergens=Eggs&Allergens=Milk&Allergens=Gluten&Ingredients=Flour&Ingredients=Sugar&Ingredients=Eggs&Ingredients=Cocoa+Powder&Ingredients=Butter&Ingredients=Milk&Instructions=Mix+ingredients+and+bake+at+350%C2%B0F+for+45+minutes."
@@ -30,11 +34,12 @@ docker run --rm -v $(pwd)/recipeIn.csv:/app/recipeIn.csv -v $(pwd)/recipeOut.csv
 
 ## What it does
 
-The container runs the `HandleInput.java` class with a query string argument, which:
-1. Parses the URL-encoded query string containing recipe data
-2. Creates a Recipe object from the parsed data
-3. Saves the recipe to `recipeOut.csv`
-4. Outputs a confirmation message
+The container runs the `HandleInput.java` class as a REST API server on port 8080, which:
+1. Accepts POST requests to `/submit` with `application/x-www-form-urlencoded` data containing recipe information
+2. Parses the form data, creates a Recipe object, and saves it to `recipeOut.csv`
+3. Returns a JSON response indicating success or error
+
+Alternatively, the container can be run with command-line arguments for direct processing.
 
 ## Volume Mounting
 
@@ -45,18 +50,27 @@ The container mounts the CSV files as volumes so that:
 
 ## Expected Output
 
-The container will output a confirmation message indicating whether the recipe was successfully saved to `recipeOut.csv`. For example:
+When running as API server, the container starts the server and logs "Server started on port 8080".
 
-```
-Recipe added successfully!
+For API requests, it returns JSON responses like:
+
+```json
+{"message": "Recipe saved successfully."}
 ```
 
-If there are any errors in parsing or saving, appropriate error messages will be displayed.
+or
+
+```json
+{"error": "Error message"}
+```
+
+When run with command-line arguments, it outputs the JSON result to console.
 
 ## Web Interface
 
-To run the full web interface, you would need to:
-1. Start a web server to serve the HTML files (e.g., `python -m http.server`)
-2. Configure CGI for the Java classes (more complex setup required)
+The Docker Compose setup includes Caddy as a reverse proxy that:
+- Serves the static HTML files from the project directory
+- Proxies API requests to `/submit` to the backend service
+- Eliminates CORS issues by serving everything from the same origin
 
-The Docker container provides a command-line interface for processing recipe submissions via query strings, simulating the CGI functionality.
+Simply run `docker-compose up` and access `http://localhost:8000` for the full application.
