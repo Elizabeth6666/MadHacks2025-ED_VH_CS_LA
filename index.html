@@ -27,7 +27,7 @@
             </div>
         </div>  
         <ul class="navbar_menu">
-            <li class="navbar_item"><a href="" class="navbar_links">My Recipes</a></li>
+            <li class="navbar_item"><a href="myrecipes.html" class="navbar_links">My Recipes</a></li>
             <li class="navbar_item"><a href="AddRecipe.html" class="navbar_links">Upload Recipes</a></li>
             <li class="navbar_item"><a href="search.html" class="navbar_links">Search</a></li>
         </ul>
@@ -44,56 +44,5 @@
         <img src="https://assets.clevelandclinic.org/transform/LargeFeatureImage/98c65686-0976-41a4-9e1a-0600a133815d/food-noise-1253633323" width="400" height="250" alt="Delicious Food">
         <img src="https://cookanyday.com/cdn/shop/articles/Blog_Dorm-Cooking.jpg?v=1659641068" width="400" height="250" alt="Delicious Food">
     </div>
-
-    <div id="status">Loading...</div>
-<div id="recipeDisplay"></div>
-
-<script>
-const csvUrl = "recipeOut.csv";
-
-fetch(csvUrl)
-    .then(response => response.text())
-    .then(csvText => {
-        document.getElementById("status").textContent = "Loaded:";
-
-        // Clean CSV text and split into lines
-        const lines = csvText.trim().split(/\r?\n/).filter(line => line.trim() !== "");
-
-        // Initialize HTML string
-        let html = "";
-
-        // Loop through all lines (all recipes)
-        lines.forEach(line => {
-            const values = line.split(",");
-
-            const id = values[0] || "";
-            const name = values[1] || "";
-            const ingredient = values[2] || "";
-            const cookingTime = values[3] || "";
-            const cookMethod = values[4] || "";
-            const allergens = values[5] || "";
-
-            const instructions = values.slice(6).join(",") || "";
-
-            html += `
-                <div class="varBox"><strong>Name:</strong> ${name}</div>
-                <div class="varBox"><strong>Ingredient List:</strong> ${ingredient}</div>
-                <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
-                <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
-                <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
-                <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
-                <hr>
-            `;
-        });
-
-        // Insert all recipes into the page
-        document.getElementById("recipeDisplay").innerHTML = html;
-    })
-    .catch(err => {
-        document.getElementById("status").textContent = "Error loading recipeOut.csv";
-        console.error(err);
-    });
-</script>
-
 </body>
 </html>
