@@ -1,0 +1,8 @@
+:80 {
+  root * /usr/share/caddy/html
+  file_server
+
+  handle /submit {
+    reverse_proxy recipe-app:8080
+  }
+}
