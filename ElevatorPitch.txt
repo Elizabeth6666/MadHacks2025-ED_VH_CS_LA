@@ -12,7 +12,6 @@ efficient nutritious meals with ease.
 
 
 Story:
-
 Our idea came from a shared struggle as college freshmen, meal planning. During our conversations, we noticed that:
 - We found it hard to constantly come up with things to make based available ingredients and time.
 - We had friends with allergies who constantly had to double-check ingredients.
