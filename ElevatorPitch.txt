@@ -1,3 +1,5 @@
+Elevator Pitch:
+
 [Meal Planner Name] is a meal-planning website designed for students who want to eat better 
 without wasting time. Our website organizes recipes based on your allergies, cooking methods,
 and time constraints. Users can upload their own recipes, save favorites, and instantly filter 
@@ -7,3 +9,21 @@ With features like step-by-step cooking instructions, ingredient sorting, and te
 guidance, [Meal Planner Name] eliminates the boring part of deciding what to cook. If you’re a 
 busy student looking for convenient meal ideas, [Meal Planner Name] helps you plan 
 efficient nutritious meals with ease.
+
+
+Story:
+
+Our idea came from a shared struggle as college freshmen, meal planning. During our conversations, we noticed that:
+- We found it hard to constantly come up with things to make based available ingredients and time.
+- We had friends with allergies who constantly had to double-check ingredients.
+- We had limited cooking tools in dorms.
+- Most meal-planning apps were either too complicated, too generic, or didn’t let us upload our own recipes.
+- And despite wanting to cook, we wasted a lot of time flipping through random recipe sites, only to give up and order food.
+
+
+So we thought, what if we make a meal planning website specifically for college students. One that contains:
+
+- Custom user profiles, where people can save allergies and preferred cooking methods.
+- Recipe objects that store ingredients, allergens, cooking time, and method.
+- A way to upload, save, and favorite recipes, since students often make their own meals or remix existing ones.
+- Sorting tools so users can filter by cooking time, allergens, equipment, or ingredients available.
