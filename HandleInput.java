@@ -79,10 +79,29 @@ public class HandleInput {
     static class SubmitHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
+            // Log request
+            System.out.println("=== REQUEST RECEIVED ===");
+            System.out.println("Method: " + exchange.getRequestMethod());
+            System.out.println("URI: " + exchange.getRequestURI());
+            System.out.println("Headers:");
+            exchange.getRequestHeaders().forEach((key, values) ->
+                System.out.println("  " + key + ": " + String.join(", ", values)));
+
             if ("POST".equals(exchange.getRequestMethod())) {
                 InputStream is = exchange.getRequestBody();
                 String body = new String(is.readAllBytes(), "UTF-8");
+                System.out.println("Body: " + body);
+
                 String response = processRecipe(body);
+
+                // Log response
+                System.out.println("=== RESPONSE TO SEND ===");
+                System.out.println("Status: 200");
+                System.out.println("Content-Type: application/json");
+                System.out.println("Access-Control-Allow-Origin: *");
+                System.out.println("Body: " + response);
+                System.out.println("========================");
+
                 exchange.getResponseHeaders().set("Content-Type", "application/json");
                 exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
                 exchange.sendResponseHeaders(200, response.length());
@@ -90,6 +109,11 @@ public class HandleInput {
                 os.write(response.getBytes());
                 os.close();
             } else {
+                // Log response for method not allowed
+                System.out.println("=== RESPONSE TO SEND ===");
+                System.out.println("Status: 405");
+                System.out.println("========================");
+
                 exchange.sendResponseHeaders(405, -1); // Method not allowed
             }
         }
