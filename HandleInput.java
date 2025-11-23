@@ -30,6 +30,8 @@ public class HandleInput {
         }
     }
 
+    private static final String HTML_TEMPLATE = "<html><body><h1>%s</h1><p>%s</p></body></html>";
+
     private static String processRecipe(String query) {
         try {
             Map<String, String[]> params = parseQuery(query);
@@ -44,7 +46,7 @@ public class HandleInput {
             String instructions = decode(getFirst(params.get("Instructions")));
 
             if (name == null || name.isEmpty()) {
-                return "{\"error\": \"Missing recipe name; nothing saved.\"}";
+                return String.format(HTML_TEMPLATE, "Error", "Missing recipe name; nothing saved.");
             }
 
             Recipe recipe = new Recipe(name);
@@ -69,10 +71,10 @@ public class HandleInput {
 
             new RecipeToDB(recipe);
 
-            return "{\"message\": \"Recipe saved successfully.\"}";
+            return String.format(HTML_TEMPLATE, "Success!", "the record was written");
 
         } catch (Exception e) {
-            return "{\"error\": \"Error saving recipe: " + e.getMessage() + "\"}";
+            return String.format(HTML_TEMPLATE, "Error", "Error saving recipe: " + e.getMessage());
         }
     }
 
@@ -97,12 +99,12 @@ public class HandleInput {
                 // Log response
                 System.out.println("=== RESPONSE TO SEND ===");
                 System.out.println("Status: 200");
-                System.out.println("Content-Type: application/json");
+                System.out.println("Content-Type: text/html");
                 System.out.println("Access-Control-Allow-Origin: *");
                 System.out.println("Body: " + response);
                 System.out.println("========================");
 
-                exchange.getResponseHeaders().set("Content-Type", "application/json");
+                exchange.getResponseHeaders().set("Content-Type", "text/html");
                 exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
                 exchange.sendResponseHeaders(200, response.length());
                 OutputStream os = exchange.getResponseBody();
