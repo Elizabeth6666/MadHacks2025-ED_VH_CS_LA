@@ -84,4 +84,21 @@ class Recipe {
     public String getInstructions() {
         return instructions;
     }
+    public String toString() {
+        String returnString = this.recipeName + ", ";
+        //ID7,Test Recipe,Sugar-1-cup_Flour-2-cup,10.0,null,Gluten,Mix and bake
+        for (String ing : ingredients) {
+            returnString += ing + " ";
+        }
+        returnString += ", ";
+        returnString += this.cookTimeInMinutes + ", ";
+        returnString += this.cookMethod + ", ";
+        for (String alg : allergens) {
+            returnString += alg + " ";
+        }
+        returnString += ", ";
+        returnString += this.instructions;
+
+        return returnString;
+    }
 }
