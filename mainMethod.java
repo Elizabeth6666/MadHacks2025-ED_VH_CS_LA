@@ -12,7 +12,7 @@ public final class mainMethod {
     // testRecipe.addIngredient("D");
     // System.out.println("Hello");
     // RecipeToDB testRecToDB = new RecipeToDB(testRecipe);
-    DBToRecipe test = new DBToRecipe("Oven","Gluten");
+    DBToRecipe test = new DBToRecipe("All","None");
     ArrayList<Recipe> banana = test.sort();
     for (Recipe apple : banana) {
       System.out.println(apple);
