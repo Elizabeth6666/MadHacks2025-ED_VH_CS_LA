@@ -8,7 +8,7 @@
 </head>
 <body>
     <button onclick ="location.href='index.html'">Home</button>
-    <h1><u>Search for Recipes</u></h1>
+    <!-- <h1><u>Search for Recipes</u></h1>
     <form action = "HandleInput.java" method = "post">
         <label for="Allergens">Allergens:</label>
         <select id="Allergens">
@@ -32,7 +32,56 @@
             <option value="All">All</option>
         </select>
         <br>
-        <input type="submit" value="Search">
-    </form>
+        <button type="submit">Submit</button>
+    </form> -->
+<div id="status">Loading...</div>
+<div id="recipeDisplay"></div>
+
+<script>
+const csvUrl = "recipeOut.csv";
+
+fetch(csvUrl)
+    .then(response => response.text())
+    .then(csvText => {
+        document.getElementById("status").textContent = "Recipes Available";
+
+        // Clean CSV text and split into lines
+        const lines = csvText.trim().split(/\r?\n/).filter(line => line.trim() !== "");
+
+        // Initialize HTML string
+        let html = "";
+
+        // Loop through all lines (all recipes)
+        lines.forEach(line => {
+            const values = line.split(",");
+
+            const id = values[0] || "";
+            const name = values[1] || "";
+            const ingredient = values[2] || "";
+            const cookingTime = values[3] || "";
+            const cookMethod = values[4] || "";
+            const allergens = values[5] || "";
+
+            const instructions = values.slice(6).join(",") || "";
+
+            html += `
+                <div class="varBox"><strong>Name:</strong> ${name}</div>
+                <div class="varBox"><strong>Ingredient List:</strong> ${ingredient}</div>
+                <div class="varBox"><strong>Cooking Time:</strong> ${cookingTime}</div>
+                <div class="varBox"><strong>Cooking Method:</strong> ${cookMethod}</div>
+                <div class="varBox"><strong>Allergens:</strong> ${allergens}</div>
+                <div class="varBox"><strong>Instructions:</strong> ${instructions}</div>
+                <hr>
+            `;
+        });
+
+        // Insert all recipes into the page
+        document.getElementById("recipeDisplay").innerHTML = html;
+    })
+    .catch(err => {
+        document.getElementById("status").textContent = "Error loading recipeOut.csv";
+        console.error(err);
+    });
+</script>
 </body>
 </html>
