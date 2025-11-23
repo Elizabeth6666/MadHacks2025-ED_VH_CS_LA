@@ -1,0 +1,1 @@
+java HandleInput "RecipeName=Chocolate+Cake&CookTime=45&CookMethod=Baking&Allergens=Eggs&Allergens=Milk&Allergens=Gluten&Ingredients=Flour&Ingredients=Sugar&Ingredients=Eggs&Ingredients=Cocoa+Powder&Ingredients=Butter&Ingredients=Milk&Instructions=Mix+ingredients+and+bake+at+350%C2%B0F+for+45+minutes."
