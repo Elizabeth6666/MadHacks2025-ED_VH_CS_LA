@@ -22,7 +22,6 @@ public class RecipeToDB {
     private String filePath = "recipe.csv";
     private BufferedWriter writer = null;
     private BufferedReader reader = null;
-    private ArrayList<String> idList = new ArrayList<String>();
 
     public RecipeToDB(Recipe recipe) {
         this.recipe = recipe;
@@ -55,10 +54,10 @@ public class RecipeToDB {
             writer = new BufferedWriter( new FileWriter(filePath,true));
             dBRecipe += recipe.getRecipeID() + ",";
             dBRecipe += recipe.getName() + ",";
-            ArrayList<Ingredient> ingredients;
+            ArrayList<String> ingredients;
             ingredients = recipe.getIngredients();
             for (int i = 0; i < ingredients.size(); i++) {
-                dBRecipe += ingredients.get(i).toString() + "_";
+                dBRecipe += ingredients.get(i) + "_";
             }
             dBRecipe = dBRecipe.substring(0,dBRecipe.length()-1);
             dBRecipe += "," + recipe.getCookTimeInMinutes() + ",";
