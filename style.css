@@ -5,16 +5,16 @@
 }
 .navbar {
     font-family: 'Georgia', serif; 
-    background: black;
+    background: rgb(28, 97, 51);
     padding: 0 20px;
-    height: 80px;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 #navbar_logo{
     font-size: 70px;
-    color: green;
+    color: rgb(238, 255, 238);
     text-align: left;
     text-decoration: none;
 }
@@ -24,11 +24,11 @@
     align-items: center;
 }
 .navbar_item{
-    margin-left:45px;
+    margin-left:40px;
 }
 .navbar_links{
     color: white;
-    font-size: 18px;
+    font-size: 21px;
     text-decoration: none;
 }
 .navbar_container{
@@ -36,18 +36,23 @@
     justify-content: space-between;
     height: 80px;
     width: 100%;
-    max-width: 1300px;
+    max-width: 1140px;
 }
 h1{
     text-align: center;
-    margin-top: 70px;
+    margin-top: 45px;
 }
 h2{
     text-align: center;
-    margin-top: 60px;
+    padding-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 40px;
 }
 .centered{
-    text-align:center;
+    /*text-align:center;*/
+    padding-left: 40px;
+    padding-right: 40px;
+    font-family: 'Georgia', serif; 
 }
 .image_container{
     justify-content: center;
@@ -58,4 +63,8 @@ h2{
 .image_container img{
     border-radius: 15px;
     border: 10px solid rgb(31, 176, 31)
+}
+ul {
+    list-style-type: disc;
+    padding-left: 60px;
 }
