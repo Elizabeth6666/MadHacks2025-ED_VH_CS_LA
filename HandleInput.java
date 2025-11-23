@@ -7,19 +7,22 @@ public class HandleInput {
 
     public static void main(String[] args) {
         try {
-            // Get query string either from CGI environment or command-line argument
+            // GET query string from CGI environment
             String query = System.getenv("QUERY_STRING");
             if ((query == null || query.isEmpty()) && args.length > 0) {
                 query = args[0];
             }
 
-            Map<String, String> params = parseQuery(query);
+            Map<String, String[]> params = parseQuery(query);
 
-            String name = decode(params.getOrDefault("RecipeName", ""));
-            String cookTime = params.getOrDefault("CookTime", "0");
-            String allergens = decode(params.getOrDefault("Allergens", ""));
-            String ingredients = decode(params.getOrDefault("Ingredients", ""));
-            String instructions = decode(params.getOrDefault("Instructions", ""));
+            String name = decode(getFirst(params.get("RecipeName")));
+            String cookTime = getFirst(params.get("CookTime"));
+            String cookMethod = decode(getFirst(params.get("CookMethod")));
+            String[] allergensArr = params.get("Allergens");
+            String allergens = "";
+            if (allergensArr != null) allergens = String.join(",", allergensArr);
+            String ingredients = decode(getFirst(params.get("Ingredients")));
+            String instructions = decode(getFirst(params.get("Instructions")));
 
             if (name == null || name.isEmpty()) {
                 outputHtml("Missing recipe name; nothing saved.");
@@ -28,38 +31,24 @@ public class HandleInput {
 
             Recipe recipe = new Recipe(name);
 
-            // Cook time
             try {
-                double ct = Double.parseDouble(cookTime);
-                recipe.addCookingTime(ct);
-            } catch (Exception e) {
-                // ignore, leave default
+                recipe.addCookingTime(Double.parseDouble(cookTime));
+            } catch (Exception e) {}
+
+            if (cookMethod != null && !cookMethod.isEmpty()) {
+                recipe.addCookMethod(cookMethod);
             }
 
-            // Allergens (comma-separated)
-            if (allergens != null && !allergens.isEmpty()) {
-                String[] al = allergens.split(",");
-                for (String a : al) {
-                    a = a.trim();
-                    if (!a.isEmpty()) recipe.addAllergens(a);
-                }
+            if (!allergens.isEmpty()) {
+                for (String a : allergens.split(",")) recipe.addAllergens(a.trim());
             }
 
-            // Ingredients (just names, separated by |, ;, or ,)
             if (ingredients != null && !ingredients.isEmpty()) {
-                String[] parts = ingredients.split("\\||;|,");
-                for (String part : parts) {
-                    part = part.trim();
-                    if (!part.isEmpty()) {
-                        recipe.addIngredient(part);
-                    }
-                }
+                for (String ing : ingredients.split(",")) recipe.addIngredient(ing.trim());
             }
 
-            // Instructions
             recipe.setInstructions(instructions == null ? "" : instructions);
 
-            // Save to DB (or file) via your helper
             new RecipeToDB(recipe);
 
             outputHtml("Recipe saved successfully.");
@@ -69,41 +58,40 @@ public class HandleInput {
         }
     }
 
-    // Parse URL-encoded query string into a map
-    private static Map<String, String> parseQuery(String query) {
-        Map<String, String> map = new HashMap<>();
-        if (query == null) return map;
+    private static Map<String, String[]> parseQuery(String query) throws UnsupportedEncodingException {
+        Map<String, String[]> map = new HashMap<>();
+        if (query == null || query.isEmpty()) return map;
         String[] pairs = query.split("&");
         for (String pair : pairs) {
-            if (pair == null || pair.isEmpty()) continue;
             int idx = pair.indexOf('=');
-            try {
-                if (idx > 0) {
-                    String key = URLDecoder.decode(pair.substring(0, idx), "UTF-8");
-                    String value = URLDecoder.decode(pair.substring(idx + 1), "UTF-8");
-                    map.put(key, value);
-                } else {
-                    String key = URLDecoder.decode(pair, "UTF-8");
-                    map.put(key, "");
-                }
-            } catch (UnsupportedEncodingException e) {
-                // ignore
+            if (idx > 0) {
+                String key = URLDecoder.decode(pair.substring(0, idx), "UTF-8");
+                String value = URLDecoder.decode(pair.substring(idx + 1), "UTF-8");
+                map.putIfAbsent(key, new String[]{});
+                String[] arr = map.get(key);
+                String[] newArr = new String[arr.length + 1];
+                System.arraycopy(arr, 0, newArr, 0, arr.length);
+                newArr[arr.length] = value;
+                map.put(key, newArr);
             }
         }
         return map;
     }
 
-    // Decode a single string safely
+    private static String getFirst(String[] arr) {
+        if (arr != null && arr.length > 0) return arr[0];
+        return "";
+    }
+
     private static String decode(String s) {
         if (s == null) return null;
         try {
             return URLDecoder.decode(s, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             return s;
         }
     }
 
-    // Output either HTML (for CGI) or plain text
     private static void outputHtml(String message) {
         String query = System.getenv("QUERY_STRING");
         if (query != null) {
@@ -114,7 +102,6 @@ public class HandleInput {
         }
     }
 
-    // Escape HTML special characters
     private static String escapeHtml(String s) {
         if (s == null) return "";
         return s.replace("&", "&amp;")
