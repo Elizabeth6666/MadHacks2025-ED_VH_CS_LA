@@ -9,11 +9,9 @@
 2) add recipe into db
  */
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class RecipeToDB {
     private Recipe recipe;
@@ -25,21 +23,13 @@ public class RecipeToDB {
     }
 
     public void checkDB() {
-        Connection conn = null;
+        
         try {
-            Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:recipe.db");
-            System.out.println("Connection created");
+            
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            
         } finally {
-            if (conn !=  null) {
-                try {
-                conn.close(); // Close the connection
-                } catch (SQLException e) {
-                    // Log or handle any exception during connection closing
-                }
-            }
+           
         }
         
     }
