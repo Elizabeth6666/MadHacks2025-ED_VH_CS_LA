@@ -27,8 +27,12 @@ public class RecipeToDB {
         this.recipe = recipe;
         addToDB();
     }
-    
+    //ID7,Test Recipe,Sugar-1-cup_Flour-2-cup,10.0,null,Gluten,Mix and bake
     public void addToDB() {
+        if (recipe.getName() == null || recipe.getIngredients() == null || recipe.getCookTimeInMinutes() == 0
+            || recipe.getCookMethod() == null || recipe.getAllergens() == null || recipe.getInstructions() == null) {
+                return;
+            }
         try {
             reader = new BufferedReader(new FileReader(filePath));
             String line;
