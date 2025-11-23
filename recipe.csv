@@ -6,3 +6,5 @@ ID5,test,D-1-Cup_,20.0,Oven,B_C_,A
 ID6,test,D-1-Cup,20.0,Oven,B_C,A
 ID7,Test Recipe,Sugar-1-cup_Flour-2-cup,10.0,null,Gluten,Mix and bake
 ID7,Pasta,Pasta,20.0,null,Boil
+ID8,Veggie Stir Fry,Broccoli_Carrot_Bell Pepper_Soy Sauce_Tofu,15.0,null,Soy_Nuts,Chop vegetables, stir fry with tofu and soy sauce for 10 minutes.
+ID9,Grilled Chicken,Chicken Breast_Olive Oil_Garlic_Salt_Pepper,25.0,null,Marinate chicken with olive oil, garlic, salt, and pepper. Grill for 25 minutes.

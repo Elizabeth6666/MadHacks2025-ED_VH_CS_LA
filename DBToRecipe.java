@@ -13,9 +13,6 @@ public class DBToRecipe {
         this.cookMethod = cookMethodIn;
         this.allergen = allergenIn;
         getAll();
-        for (Recipe rec : recipeList) {
-            System.out.println(rec);
-        }
     }
 
     public void getAll() {
@@ -83,7 +80,41 @@ public class DBToRecipe {
 
     public ArrayList<Recipe> sort() {
         ArrayList<Recipe> returnList = new ArrayList<Recipe>();
+        ArrayList<Recipe> cookChecked = new ArrayList<Recipe>();
+        if (this.cookMethod.equals("All")) {
+            cookChecked = recipeList;
+        } else {
+            for (Recipe rec : recipeList) {
+                if (cookMethod.equals("Dorm")) {
+                    if (rec.getCookMethod().equals("Microwave") || rec.getCookMethod().equals("Fridge") 
+                    || rec.getCookMethod().equals("No Cook")) {
+                        cookChecked.add(rec);
+                    }
+                } else {
+                    if (rec.getCookMethod().equals(this.cookMethod)) {
+                        cookChecked.add(rec);
+                    }
+                }
+            }
+        }
 
+        if (this.allergen.equals("None")) {
+            returnList = cookChecked;
+        } else {
+            for (Recipe rec : cookChecked) {
+                ArrayList<String> allergens = rec.getAllergens();
+                boolean add = true;
+                for (String al : allergens) {
+                    if (al.equals(allergen)) {
+                        add = false;
+                    }
+                }
+                if (add) {
+                    returnList.add(rec);
+                }
+            }
+        }
+        
         return returnList;
     }
 

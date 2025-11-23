@@ -27,8 +27,11 @@ public class RecipeToDB {
         this.recipe = recipe;
         addToDB();
     }
-    
     public void addToDB() {
+        if (recipe.getName() == null || recipe.getIngredients() == null || recipe.getCookTimeInMinutes() == 0
+            || recipe.getCookMethod() == null || recipe.getAllergens() == null || recipe.getInstructions() == null) {
+                return;
+            }
         try {
             reader = new BufferedReader(new FileReader(filePath));
             String line;

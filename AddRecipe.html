@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Form</title>
 </head>
 <body>
+  <form id="recipeForm" method="GET" action="http://localhost:8000/submit">
+    <label>Recipe Name</label>
+    <input type="text" name="RecipeName" required><br>
 
-  <form action="HandleInput.java" method="GET">
+    <label>Cook Time</label>
+    <input type="number" name="CookTime" required><br>
 
-    <label for="RecipeName">Recipe Name</label>
-    <input type="text" id="RecipeName" name="RecipeName" maxlength="50" required><br>
+    <label>Cook Method</label>
+    <select name="CookMethod">
+      <option value="Oven">Oven</option>
+      <option value="AirFryer">Air Fryer</option>
+      <option value="Stove">Stove</option>
+      <option value="Microwave">Microwave</option>
+      <option value="NoCook">No Cook</option>
+      <option value="Fridge">Fridge</option>
+    </select><br>
 
-    <label for="CookTime">Cook Time</label>
-    <input type="text" id="CookTime" name="CookTime" maxlength="3" required><br>
-
-    <label for="Allergens">Allergens</label><br>
+    <label>Allergens</label><br>
     <label><input type="checkbox" name="Allergens" value="Gluten"> Gluten</label><br>
     <label><input type="checkbox" name="Allergens" value="Lactose"> Lactose</label><br>
     <label><input type="checkbox" name="Allergens" value="Eggs"> Eggs</label><br>
     <label><input type="checkbox" name="Allergens" value="Nuts"> Nuts</label><br>
     <label><input type="checkbox" name="Allergens" value="SeaFood"> Sea Food</label><br>
     <label><input type="checkbox" name="Allergens" value="Sugar"> Sugar</label><br>
+    <label><input type="checkbox" name="Allergens" value="None"> None</label><br>
 
-    <label for="CookMethod">Cook Method</label>
-    <select id="CookMethod" name="CookMethod">
-        <option value="Oven">Oven</option>
-        <option value="AirFryer">Air Fryer</option>
-        <option value="Stove">Stove</option>
-        <option value="Microwave">Microwave</option>
-        <option value="NoCook">No Cook</option>
-        <option value="Fridge">Fridge</option>
-    </select><br>
 
-    <label for="Ingredients">Ingredients</label>
-    <input type="text" id="Ingredients" name="Ingredients" required><br>
+    <label>Ingredients (comma separated)</label>
+    <input type="text" name="Ingredients" required><br>
 
-    <label for="Instructions">Recipe Instructions</label>
-    <input type="text" id="Instructions" name="Instructions" required><br>
+    <label>Instructions</label>
+    <input type="text" name="Instructions" required><br>
 
-    <input type="submit"><br>
+    <button type="submit">Submit</button>
   </form>
-
 </body>
+</html>
