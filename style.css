@@ -10,6 +10,9 @@
     display: flex;
     justify-content: center;
 }
+.navbar_logo{
+    text-align: left;
+}
 .navbar-container{
     display: flex;
     justify-content: space-between;
